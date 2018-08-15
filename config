@@ -9,6 +9,7 @@ bindsym $mod+Return exec i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
+bindsym mod1+F4 kill
 
 #bindsym $mod+d exec dmenu_run # start dmenu (a program launcher)
 #bindsym $mod+shift+d exec synapse # synapse
@@ -90,26 +91,25 @@ bindsym $mod+Shift+0 move container to workspace 10
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
+
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # logout
-#set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
-#mode "$mode_system" {
-#    bindsym l exec --no-startup-id i3exit lock, mode "default"
-#    bindsym e exec --no-startup-id i3exit logout, mode "default"
-#    bindsym s exec --no-startup-id i3exit suspend, mode "default"
-#    bindsym h exec --no-startup-id i3exit hibernate, mode "default"
-#    bindsym r exec --no-startup-id i3exit reboot, mode "default"
-#    bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"
-#
-#    # back to normal: Enter or Escape
-#    bindsym Return mode "default"
-#    bindsym Escape mode "default"
-#}
-#bindsym $mod+Pause mode "$mode_system"
+set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+mode "$mode_system" {
+    bindsym l exec --no-startup-id i3exit lock, mode "default"
+    bindsym e exec --no-startup-id i3exit logout, mode "default"
+    bindsym s exec --no-startup-id i3exit suspend, mode "default"
+    bindsym h exec --no-startup-id i3exit hibernate, mode "default"
+    bindsym r exec --no-startup-id i3exit reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+Shift+e mode "$mode_system"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -140,6 +140,9 @@ bindsym $mod+r mode "resize"
 # pp-launcher
 bindsym $mod+p exec "pp-launcher"
 
+# pp-pulse-sink-switcher
+bindsym $mod+Shift+s exec "pp-pulse-sink-switcher"
+
 # i3-logout
 bindsym $mod+Pause exec "i3-logout"
 
@@ -150,10 +153,8 @@ bar {
         tray_output primary
 }
 
-# autostart
-exec feh --bg-fill /media/ntfs-documents/Zasoby/tla/20180311_LEGO_Star_Wars/full-size-lego-star-wars-wallpaper-1920x1080-WTG3064954.jpg
-exec xrandr --output DVI-1 --off
-exec setxkbmap pl
-exec xfce4-volumed
-exec xbindkeys
+# windows
+for_window [title="^Pulse Sink & Input Switcher$"] floating enable
 
+# autostart
+exec --no-startup-id autostart.sh
