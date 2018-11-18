@@ -1,5 +1,7 @@
 set $mod Mod4
-font pango:Terminus 14px
+#font pango:Terminus 14px
+font pango:Terminus Light Condensed 16
+
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -152,13 +154,13 @@ bar {
   status_command i3status
   tray_output primary
   colors {
-    separator #969896
-    background #1d1f21
-    statusline #c5c8c6
-    focused_workspace #81a2be #81a2be #1d1f21
-    active_workspace #373b41 #373b41 #ffffff
-    inactive_workspace #282a2e #282a2e #969896
-    urgent_workspace #cc6666 #cc6666 #ffffff
+    separator #666666
+    background #000000
+    statusline #ffffff
+    focused_workspace #4c7899 #285577 #ffffff
+    active_workspace #333333 #5f676a #ffffff
+    inactive_workspace #333333 #222222 #888888
+    urgent_workspace #2f343a #900000 #ffffff
   }
 }
 
@@ -170,10 +172,13 @@ for_window [class="Arandr"] floating enable
 # move workspace to another screen
 bindsym $mod+m move workspace to output left
 
+# default layout
+workspace_layout tabbed
+
 # autostart
 exec --no-startup-id autostart.sh
 
-client.focused #81a2be #81a2be #1d1f21 #282a2e
-client.focused_inactive #373b41 #373b41 #969896 #282a2e
-client.unfocused #282a2e #282a2e #969896 #282a2e
-client.urgent #373b41 #cc6666 #ffffff #cc6666
+client.focused #4c7899 #285577 #ffffff #2e9ef4
+client.focused_inactive #333333 #5f676a #ffffff #484e50
+client.unfocused #333333 #222222 #888888 #292d2e
+client.urgent #2f343a #900000 #ffffff #900000
